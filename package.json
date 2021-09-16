@@ -1,0 +1,19 @@
+{
+  "name": "local-cosmos-db",
+  "version": "1.0.0",
+  "description": "### Prerequisites",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/florianluther/local-cosmos-db.git"
+  },
+  "author": "Florian Luther",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/florianluther/local-cosmos-db/issues"
+  },
+  "homepage": "https://github.com/florianluther/local-cosmos-db#readme"
+}
