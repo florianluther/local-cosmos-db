@@ -1,0 +1,27 @@
+{
+  "author": "Florian Luther",
+  "bugs": {
+    "url": "https://github.com/florianluther/local-cosmos-db/issues"
+  },
+  "dependencies": {
+    "@azure/cosmos": "^3.14.1",
+    "dotenv": "^10.0.0"
+  },
+  "description": "### Prerequisites",
+  "devDependencies": {
+    "@types/node": "^16.9.2"
+  },
+  "homepage": "https://github.com/florianluther/local-cosmos-db#readme",
+  "license": "MIT",
+  "main": "app.ts",
+  "name": "local-cosmos-db",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/florianluther/local-cosmos-db.git"
+  },
+  "scripts": {
+    "start": "ts-node ./src/app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}
