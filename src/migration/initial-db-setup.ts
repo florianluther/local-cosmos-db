@@ -1,50 +1,39 @@
-import { CosmosClient } from "@azure/cosmos";
-import { IConfiguration } from "../configuration";
-import { ILogger } from "../logger";
+import { CosmosClient } from '@azure/cosmos'
+import { IConfiguration } from '../configuration'
+import { ILogger } from '../logger'
 
 export class InitialDatabaseSetup {
-  private static instance: InitialDatabaseSetup;
+    private static instance: InitialDatabaseSetup
 
-  static make(
-    client: CosmosClient,
-    configuration: IConfiguration,
-    logger: ILogger
-  ): InitialDatabaseSetup {
-    if (!!this.instance) {
-      return this.instance;
+    static make(client: CosmosClient, configuration: IConfiguration, logger: ILogger): InitialDatabaseSetup {
+        if (!!this.instance) {
+            return this.instance
+        }
+
+        this.instance = new InitialDatabaseSetup(client, configuration, logger)
+
+        return this.instance
     }
 
-    this.instance = new InitialDatabaseSetup(client, configuration, logger);
+    private constructor(
+        private readonly client: CosmosClient,
+        private readonly configuration: IConfiguration,
+        private readonly logger: ILogger
+    ) {}
 
-    return this.instance;
-  }
+    async createDatabase(): Promise<void> {
+        this.logger.log(`The database '${this.configuration.database}' will be created if it does not exist.`)
 
-  private constructor(
-    private readonly client: CosmosClient,
-    private readonly configuration: IConfiguration,
-    private readonly logger: ILogger
-  ) {}
+        await this.client.databases.createIfNotExists({
+            id: this.configuration.database,
+        })
+    }
 
-  async createDatabase(): Promise<void> {
-    this.logger.log(
-      `The database '${this.configuration.database}' will be created if it does not exist.`
-    );
+    async createContainer(name: string, partitionKey: string): Promise<void> {
+        this.logger.log(`The container '${name}' will be created if it does not exist.`)
 
-    await this.client.databases.createIfNotExists({
-      id: this.configuration.database,
-    });
-  }
-
-  async createContainer(name: string, partitionKey: string): Promise<void> {
-    this.logger.log(
-      `The container '${name}' will be created if it does not exist.`
-    );
-
-    await this.client
-      .database(this.configuration.database)
-      .containers.createIfNotExists(
-        { id: name, partitionKey },
-        { offerThroughput: 400 }
-      );
-  }
+        await this.client
+            .database(this.configuration.database)
+            .containers.createIfNotExists({ id: name, partitionKey }, { offerThroughput: 400 })
+    }
 }

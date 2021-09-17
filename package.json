@@ -9,7 +9,8 @@
   },
   "description": "### Prerequisites",
   "devDependencies": {
-    "@types/node": "^16.9.2"
+    "@types/node": "^16.9.2",
+    "prettier": "^2.4.1"
   },
   "homepage": "https://github.com/florianluther/local-cosmos-db#readme",
   "license": "MIT",
@@ -20,6 +21,7 @@
     "url": "git+https://github.com/florianluther/local-cosmos-db.git"
   },
   "scripts": {
+    "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node ./src/app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -1,23 +1,23 @@
 export interface ILogger {
-  log(message: string): void;
+    log(message: string): void
 }
 
 export class Logger implements ILogger {
-  private static logger: ILogger;
+    private static logger: ILogger
 
-  private constructor() {}
+    private constructor() {}
 
-  static make(): ILogger {
-    if (this.logger) {
-      return this.logger;
+    static make(): ILogger {
+        if (this.logger) {
+            return this.logger
+        }
+
+        this.logger = new Logger()
+
+        return this.logger
     }
 
-    this.logger = new Logger();
-
-    return this.logger;
-  }
-
-  log(message: string): void {
-    console.log(message);
-  }
+    log(message: string): void {
+        console.log(message)
+    }
 }

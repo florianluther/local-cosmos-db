@@ -1,5 +1,5 @@
 export interface IEntity<T> {
-  id: string;
-  partition: string;
-  data: T;
+    id: string
+    partition: string
+    data: T
 }

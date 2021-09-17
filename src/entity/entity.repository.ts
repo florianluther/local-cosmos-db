@@ -1,25 +1,25 @@
-import { IRepositoryConfiguration } from "../cosmos-db/configuration";
-import { CosmosDbRepository } from "../cosmos-db/cosmos-db-repository";
-import { IEntity } from "./types";
+import { IRepositoryConfiguration } from '../cosmos-db/configuration'
+import { CosmosDbRepository } from '../cosmos-db/cosmos-db-repository'
+import { IEntity } from './types'
 
 export class EntityRepository extends CosmosDbRepository<IEntity<string>> {
-  private static instance: EntityRepository;
+    private static instance: EntityRepository
 
-  protected get containerName(): string {
-    return "entities";
-  }
-
-  private constructor(configuration: IRepositoryConfiguration) {
-    super(configuration);
-  }
-
-  static make(configuration: IRepositoryConfiguration): EntityRepository {
-    if (!!this.instance) {
-      return this.instance;
+    protected get containerName(): string {
+        return 'entities'
     }
 
-    this.instance = new EntityRepository(configuration);
+    private constructor(configuration: IRepositoryConfiguration) {
+        super(configuration)
+    }
 
-    return this.instance;
-  }
+    static make(configuration: IRepositoryConfiguration): EntityRepository {
+        if (!!this.instance) {
+            return this.instance
+        }
+
+        this.instance = new EntityRepository(configuration)
+
+        return this.instance
+    }
 }
