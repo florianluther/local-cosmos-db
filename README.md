@@ -59,3 +59,20 @@ export NODE_EXTRA_CA_CERTS=[PATH_TO_YOUR_CERTIFICATE]
 ```
 https://localhost:8081/_explorer/index.html
 ```
+
+### Local Development
+
+##### Run
+
+```bash
+# development
+$ npm run start
+```
+
+##### Configure
+
+In order to run this project locally, you need to add the `.env` file and set the following values:
+
+- `DATABASE` - The name of the database.
+- `ENDPOINT` - The URL of the endpoint (e.g. `https://localhost:8081`).
+- `KEY` - The secret key to access the database.

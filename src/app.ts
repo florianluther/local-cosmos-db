@@ -1,30 +1,33 @@
-import { CosmosClient } from "@azure/cosmos";
 import { AppConfiguration } from "./configuration";
+import { EntityRepository } from "./entity/entity.repository";
+import { Logger } from "./logger";
 
 export async function run(): Promise<void> {
+  const logger = Logger.make();
   const configuration = AppConfiguration.read();
-  const client = new CosmosClient({
-    endpoint: configuration.endpoint,
-    key: configuration.key,
+
+  const repository: EntityRepository = EntityRepository.make({
+    connection: { endpoint: configuration.endpoint, key: configuration.key },
+    databaseName: configuration.database,
+    pageSize: 100,
   });
-  const result = await readDatabaseDefinition(client);
 
-  console.log(JSON.stringify(result));
-}
+  const keys = {
+    id: "1",
+    partition: "A",
+  };
 
-export async function readDatabaseDefinition(
-  cosmosDbClient: CosmosClient
-): Promise<string> {
-  const configuration = AppConfiguration.read();
-  const { resource: definition } = await cosmosDbClient
-    .database(configuration.database)
-    .read();
+  const result = await repository.get(keys.id, keys.partition);
 
-  if (!definition) {
-    return "<empty>";
+  if (result.kind === "not-found") {
+    logger.log(
+      `The entity with id '${keys.id}' and partition key '${keys.partition}' was not found.`
+    );
+  } else {
+    logger.log(
+      `The entity with id '${result.value.id}' was successfully loaded: '${result.value.data}'`
+    );
   }
-
-  return definition.id;
 }
 
 run();

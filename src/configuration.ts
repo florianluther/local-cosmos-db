@@ -1,18 +1,35 @@
+require("dotenv").config();
+
 export interface IConfiguration {
-  container: string;
   database: string;
   endpoint: string;
   key: string;
 }
 
-// TODO: use .env (dotenv)
 export class AppConfiguration {
+  private static instance: IConfiguration;
+
+  private constructor() {}
+
   static read(): IConfiguration {
-    return {
-      endpoint: "endpoint",
-      key: "key",
-      database: "db",
-      container: "container",
+    if (this.instance) {
+      return this.instance;
+    }
+
+    const endpoint = process.env["ENDPOINT"];
+    const key = process.env["KEY"];
+    const database = process.env["DATABASE"];
+
+    if (!endpoint || !key || !database) {
+      throw new Error(`One or more configuration variables are undefined.`);
+    }
+
+    this.instance = {
+      endpoint,
+      key,
+      database,
     };
+
+    return this.instance;
   }
 }
