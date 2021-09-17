@@ -55,6 +55,7 @@ export abstract class CosmosDbRepository<T>
 
             return new NoContent()
         } catch (error) {
+            /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
             // @ts-ignore
             if (error.code === 404) {
                 return new NotFound()
@@ -84,6 +85,7 @@ export abstract class CosmosDbRepository<T>
 
             return new Created(entity)
         } catch (error) {
+            /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
             // @ts-ignore
             if (error.code === 409) {
                 return new Conflict()
@@ -101,6 +103,7 @@ export abstract class CosmosDbRepository<T>
 
             return new Ok(entity)
         } catch (error) {
+            /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
             // @ts-ignore
             if (error.code === 404) {
                 return new NotFound()
@@ -158,6 +161,7 @@ export abstract class CosmosDbRepository<T>
         })
     }
 
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     async execute<TResult>(name: string, partitionKey: string, params?: any[]): Promise<Ok<TResult> | NotFound> {
         const database: Database = this.client.database(this.databaseName)
         const container: Container = database.container(this.containerName)

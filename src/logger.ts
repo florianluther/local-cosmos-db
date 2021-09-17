@@ -5,6 +5,7 @@ export interface ILogger {
 export class Logger implements ILogger {
     private static logger: ILogger
 
+    /* eslint-disable-next-line @typescript-eslint/no-empty-function */
     private constructor() {}
 
     static make(): ILogger {
@@ -18,6 +19,7 @@ export class Logger implements ILogger {
     }
 
     log(message: string): void {
+        /* eslint-disable-next-line no-console */
         console.log(message)
     }
 }

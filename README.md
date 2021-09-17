@@ -73,6 +73,6 @@ $ npm run start
 
 In order to run this project locally, you need to add the `.env` file and set the following values:
 
-- `DATABASE` - The name of the database.
-- `ENDPOINT` - The URL of the endpoint (e.g. `https://localhost:8081`).
-- `KEY` - The secret key to access the database.
+-   `DATABASE` - The name of the database.
+-   `ENDPOINT` - The URL of the endpoint (e.g. `https://localhost:8081`).
+-   `KEY` - The secret key to access the database.

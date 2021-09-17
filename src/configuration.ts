@@ -1,3 +1,4 @@
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
 require('dotenv').config()
 
 export interface IConfiguration {
@@ -9,6 +10,7 @@ export interface IConfiguration {
 export class AppConfiguration {
     private static instance: IConfiguration
 
+    /* eslint-disable-next-line @typescript-eslint/no-empty-function */
     private constructor() {}
 
     static read(): IConfiguration {
